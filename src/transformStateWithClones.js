@@ -7,9 +7,8 @@
  * @return {Object[]}
  */
 function transformStateWithClones(state, actions) {
-  // const actionsCopy = actions;
   const stateHistory = [];
-  const stateCopy = { ...state };
+  const stateCopy = structuredClone(state);
 
   for (const key of actions) {
     switch (key.type) {
@@ -34,8 +33,8 @@ function transformStateWithClones(state, actions) {
       }
 
       case `clear`: {
-        for (const propertie in stateCopy) {
-          delete stateCopy[propertie];
+        for (const property in stateCopy) {
+          delete stateCopy[property];
         }
 
         const newObj = structuredClone(stateCopy);
